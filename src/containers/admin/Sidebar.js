@@ -43,6 +43,9 @@ function Sidebar (){
                     <li class="dropdown">
                     <a  onClick={() => {window.location.href="/dashboard"}} class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
                     </li>
+                    <li class="dropdown">
+                        <Link to = '/pos'  class="nav-link"><i data-feather="monitor"></i><span>Point Of Sale</span></Link>
+                    </li>
                     <li className={`dropdown${onclickclass}`}>
                     <a href="#" class="menu-toggle nav-link has-dropdown" onClick={handleClick}><i data-feather="command"></i><span>Dealers</span></a>
                     <ul class="dropdown-menu">

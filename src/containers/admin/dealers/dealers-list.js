@@ -9,7 +9,7 @@ function DealerList() {
   const [data, setposts] = useState([{}])
 
     useEffect(() => {
-      axios.get("/dealer/get").then(Response =>{
+      axios.get("https://subo-sons-backend.onrender.com/dealer/get").then(Response =>{
         console.log(Response.data
           )
         setposts(Response.data)

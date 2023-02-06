@@ -23,7 +23,7 @@ function AddDealer(props) {
     setData(newdata)
    // console.log(data)
   }
-  const url = "/dealer/add"
+  const url = "https://subo-sons-backend.onrender.com/dealer/add"
   function submit(e) {
     console.log(data)
     e.preventDefault();

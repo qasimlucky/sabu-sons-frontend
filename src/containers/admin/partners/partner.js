@@ -13,7 +13,7 @@ function Partner() {
   const [itemOffset, setItemOffset] = useState(0);
 
     useEffect(() => {
-      axios.get("/partner/get").then(Response =>{
+      axios.get("https://subo-sons-backend.onrender.com/partner/get").then(Response =>{
         console.log(Response.data)
         setData(Response.data)
       }).catch(err =>{

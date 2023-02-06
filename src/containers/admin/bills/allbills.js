@@ -20,15 +20,20 @@ function AllBill() {
 
 
   useEffect(() => {
-    axios.get("/bill/get")
-    .then(Response =>{
-      //console.log(Response.data)
-      setData(Response.data)
-    }).catch(err =>{
-      console.log(err)
-    })
-    console.log("ready to destructure")
-    console.log(data)
+   async function GetRequest(){
+     await axios.get("https://subo-sons-backend.onrender.com/bill/get")
+      .then(Response =>{
+        console.log(Response.data)
+        setData(Response.data)
+      }).catch(err =>{
+        console.log("this is error")
+        console.log(err)
+      })
+      console.log("ready to destructure")
+      console.log(data)
+
+    }
+    GetRequest();
     /* data.forEach(myfunction)
     function myfunction(item){
       console.log(item.bill_items)

@@ -17,7 +17,7 @@ function AddCategories(props) {
     setData(newdata)
    // console.log(data)
   }
-  const url = "/stock/add/categories"
+  const url = "https://subo-sons-backend.onrender.com/stock/add/categories"
   function submit(e) {
     console.log(data)
     e.preventDefault();

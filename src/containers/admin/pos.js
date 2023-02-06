@@ -56,7 +56,7 @@ function PointOfSale(props) {
     const time = current.toLocaleTimeString();
     
     useEffect(() => {
-      axios.get("/stock/get").then(Response =>{
+      axios.get("https://subo-sons-backend.onrender.com/stock/get").then(Response =>{
         console.log(Response.data)
         setData(Response.data)
       }).catch(err =>{
@@ -74,7 +74,7 @@ function PointOfSale(props) {
     }
       // All Auther list name
       useEffect(() => {
-        axios.get("/stock/get/authername").then(Response =>{
+        axios.get("https://subo-sons-backend.onrender.com/stock/get/authername").then(Response =>{
           console.log(Response.data)
           setAutherName(Response.data)
         }).catch(err =>{
@@ -83,7 +83,7 @@ function PointOfSale(props) {
         },[]);
 
         useEffect(() => {
-            axios.get("/stock/get/categoryname").then(Response =>{
+            axios.get("https://subo-sons-backend.onrender.com/stock/get/categoryname").then(Response =>{
               console.log(Response.data)
               setCategoryName(Response.data)
             }).catch(err =>{
@@ -100,7 +100,7 @@ function PointOfSale(props) {
      function handle(e) {
         var authers=e.target.value
         axios
-            .post("/stock/get/auther", {auther:authers})
+            .post("https://subo-sons-backend.onrender.com/stock/get/auther", {auther:authers})
             .then(res => {
               console.log(res.data)
               setData(res.data)
@@ -113,7 +113,7 @@ function PointOfSale(props) {
         var categories=e.target.value
         console.log(e.target.value)
         axios
-            .post("/stock/get/categorybook", {categories:categories})
+            .post("https://subo-sons-backend.onrender.com/stock/get/categorybook", {categories:categories})
             .then(res => {
               console.log(res.data)
               setData(res.data)
@@ -210,7 +210,7 @@ function PointOfSale(props) {
         handlePrint()
         
          axios
-        .post("/bill/add", billObject)
+        .post("https://subo-sons-backend.onrender.com/bill/add", billObject)
         .then(res => {
           console.log(res.data)
           Swal.fire({

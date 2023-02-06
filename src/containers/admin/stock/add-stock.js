@@ -24,7 +24,7 @@ function ChangeAgain(){
 }
 
 useEffect(() => {
-  axios.get("/partner/get").then(Response =>{
+  axios.get("https://subo-sons-backend.onrender.com/partner/get").then(Response =>{
     console.log(Response.data)
     setDbPartner(Response.data)
   }).catch(err =>{
@@ -33,7 +33,7 @@ useEffect(() => {
   },[]);
 
   useEffect(() => {
-    axios.get("/stock/get/categories").then(Response =>{
+    axios.get("https://subo-sons-backend.onrender.com/stock/get/categories").then(Response =>{
       console.log(Response.data)
       setStockCategories(Response.data)
     }).catch(err =>{
@@ -75,7 +75,7 @@ useEffect(() => {
   }
 
 
-const url = "/stock/add"
+const url = "https://subo-sons-backend.onrender.com/stock/add"
 function handle(e){
     
        const newdata = {...data}

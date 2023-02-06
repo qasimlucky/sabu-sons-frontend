@@ -16,7 +16,7 @@ function PartnerTransaction() {
 
       useEffect(() => {
         axios
-        .post("/partner/transaction", {partner_id:partner_id})
+        .post("https://subo-sons-backend.onrender.com/partner/transaction", {partner_id:partner_id})
         .then(res => {
           console.log(res.data)
           setData(res.data)

@@ -26,7 +26,7 @@ function EditStockForm(props) {
     }
 
   useEffect(() => {
-    axios.get("/stock/get/categories").then(Response =>{
+    axios.get("https://subo-sons-backend.onrender.com/stock/get/categories").then(Response =>{
       console.log(Response.data)
       setStockCategories(Response.data)
     }).catch(err =>{
@@ -35,7 +35,7 @@ function EditStockForm(props) {
     },[]);
 
     useEffect(() => {
-      axios.get("/partner/get").then(Response =>{
+      axios.get("https://subo-sons-backend.onrender.com/partner/get").then(Response =>{
         console.log(Response.data)
         setDbPartner(Response.data)
       }).catch(err =>{
@@ -50,7 +50,7 @@ function EditStockForm(props) {
     setData(newdata)
     console.log(data)
   }
-  const url = "/stock/edit"
+  const url = "https://subo-sons-backend.onrender.com/stock/edit"
 
   function submit(e){
     console.log(ispartner)
