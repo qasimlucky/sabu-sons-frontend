@@ -16,7 +16,7 @@ function AllBill() {
   const [data, setData] = useState([])
   const [itemOffset, setItemOffset] = useState(0);
   const MySwal = withReactContent(Swal)
-
+  let navigate = useNavigate();
 
 
   useEffect(() => {
@@ -85,7 +85,6 @@ function AllBill() {
       }) 
     } 
 
-    let navigate = useNavigate();
     function OpenBill(billDetails){
       console.log(billDetails)
       navigate("/bill",{state:{sendData:billDetails}})

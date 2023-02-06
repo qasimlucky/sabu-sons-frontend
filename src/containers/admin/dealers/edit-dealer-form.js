@@ -55,6 +55,7 @@ function EditDealerForm(props) {
           text: 'Something went wrong!',
         })
           console.log(err)
+          navigate("/alldealer")
         })
 
   }

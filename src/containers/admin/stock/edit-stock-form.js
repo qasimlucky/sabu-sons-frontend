@@ -82,6 +82,7 @@ function EditStockForm(props) {
           text: 'Stock Updated!!!!',
         })
         console.log(res.data)
+        navigate("/allstock")
       }).catch(err =>{
         Swal.fire({
           icon: 'error',
@@ -89,6 +90,7 @@ function EditStockForm(props) {
           text: 'Something went wrong!',
         })
           console.log(err)
+          navigate("/allstock")
         })
 
 } 

@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
@@ -15,7 +16,7 @@ const [data, setData] = useState({})
 const [dbpartner, setDbPartner] = useState()
 const [stockpartner, setStockPartner] = useState([])
 const [stockcategories, setStockCategories] = useState([{}])  
-
+let navigate = useNavigate();
 function ChangeMe(){
   setIsShow(false)
 }
@@ -77,7 +78,6 @@ useEffect(() => {
 
 const url = "https://subo-sons-backend.onrender.com/stock/add"
 function handle(e){
-    
        const newdata = {...data}
        newdata[e.target.id] = e.target.value
        setData(newdata)
@@ -116,6 +116,7 @@ async function StockImage (e){
           text: 'New Stock Add!!!!',
         })
         console.log(res.data)
+        navigate("/allstock")
       }).catch(err =>{
         Swal.fire({
           icon: 'error',
@@ -123,6 +124,7 @@ async function StockImage (e){
           text: 'Something went wrong!',
         })
           console.log(err)
+          navigate("/allstock")
         })
 
 } 
@@ -134,9 +136,7 @@ async function StockImage (e){
       <Sidebar/>
 
   <div id="app" style={{marginTop : 150}}>
-
-    
-        <section class="section">
+      <section class="section">
         {isshow && (
           <div class="container mt-10">
             <div class="row">
@@ -330,11 +330,8 @@ async function StockImage (e){
               </div>
           )}
           {/* after false */}
-        </section>
-
-     
+      </section>
   </div>
-  
 </>
        );
 }

@@ -1,13 +1,14 @@
 import React,{ useEffect, useState } from "react";
 import  { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import { useNavigate } from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import axios from "axios";
 import Calculator from "awesome-react-calculator";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { BsDashSquareFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
-import { BsCurrencyDollar } from "react-icons/bs";
+import { BsGridFill } from "react-icons/bs";
 import { BsCalculator } from "react-icons/bs";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
@@ -26,7 +27,9 @@ function PointOfSale(props) {
     const [numberofbillitem, setNumberOfBillItem] = useState(0)
     const [savebill, setSaveBill] = useState([])
     const [isprintbill, setIsPrintBill] = useState(false);
-    const [iseditmode, setIsEditMode] = useState(false)
+    const [iseditmode, setIsEditMode] = useState(false);
+    
+    let navigate = useNavigate();
     //Edit bill
       //Edit bill
    /*    const location = useLocation();
@@ -334,7 +337,7 @@ function PointOfSale(props) {
     return (
         <>
             <div class="popup requires-no-scroll">
-                <div className="pos-header" style={{display:"flex", flexWrap:"nowrap"}}> 
+                <div className="pos-header" style={{display:"flex", flexWrap:"nowrap", background:"black", color:"#FFDF00"}}> 
                     <div style={{display:"flex", width:"50%", height:"35px",}}>
                         <div style={{marginLeft:"10px", display:"flex", alignContent:"center",alignItems:"center"}}>
                             <b>Location:</b>
@@ -362,51 +365,65 @@ function PointOfSale(props) {
                                 
                             )}    
                         </div>
+                        
                         <div style={{display:"flex" , alignContent:"center", alignItems:"center", marginRight:"5px"}}>
                                 <BsCalculator onClick={()=>OpenCalculator()}/>
                         </div>
+                        <div style={{display:"flex" , alignContent:"center", alignItems:"center", marginRight:"5px"}}>
+                                <BsGridFill onClick={()=>navigate("/dashboard")}/>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className="pos-flex-container">
                     {/* bill container */}
-                    <div className="pos-header bg-info pos-bill-container">
-                        <div className="bill-header">
-                            <div className="dealer-selector" >
-                                <div class="form-group" style={{margin:"2px"}}>
-                                    <select class="form-control" style={{height:"36px", padding:'5px', border:"1px solid"}}>
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="dealer-searchbar">
-                                <div class="form-group" style={{margin:"2px"}}>
-                                    <div style={{display: "flex" , alignItems:"center"}}>
-                                        <input type="search" class="form-control" style={{height:"36px", border:"1px solid"}} />
-                                        <i style={{backgroundColor:"white", padding:"12px",height:"35px", border :"1px solid"}} class="fas fa-search"></i>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    
+                    <div className="pos-header pos-bill-container" >
                         <div>
-                            <div style={{display:"flex", flexWrap: "nowrap",width:"100%", backgroundColor:"white"}}>
-                                <div  style={{height:"40px", width:"30%",fontSize:"17px",padding:"6px", border:"1px solid lightgray"}}>Product
+                        <div className="bill-header" style={{backgroundColor:"black"}}>
+                                <div className="dealer-selector" >
+                                    <div class="form-group" style={{margin:"2px"}}>
+                                        <select class="form-control" style={{height:"36px", padding:'5px'}}>
+                                            <option>Option 1</option>
+                                            <option>Option 2</option>
+                                            <option>Option 3</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div  style={{height:"40px",width:"25%",fontSize:"17px",padding:"6px", border:"1px solid lightgray" }}>Quantity
+                                <div className="dealer-searchbar" >
+                                    <div class="form-group" style={{margin:"2px"}}>
+                                        <div style={{display: "flex" , alignItems:"center"}}>
+                                            <input type="search" class="form-control" style={{height:"36px", border:"1px solid"}}  placeholder="Customer Name"/>
+                                            {/* <i style={{backgroundColor:"white", padding:"12px",height:"35px", border :"1px solid"}} class="fas fa-search"></i> */}
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div  style={{height:"40px",width:"17%",fontSize:"17px", padding:"6px", border:"1px solid lightgray"}}>Price inc. tax
+                                <div className="dealer-searchbar" >
+                                    <div class="form-group" style={{margin:"2px"}}>
+                                        <div style={{display: "flex" , alignItems:"center"}}>
+                                            <input type="search" class="form-control" style={{height:"36px", border:"1px solid",}}  placeholder="Customer Phone Number" />
+                                            {/* <i style={{backgroundColor:"white", padding:"12px",height:"35px", border :"1px solid"}} class="fas fa-search"></i> */}
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div style={{height:"40px",width:"17%",fontSize:"17px", padding:"6px", border:"1px solid lightgray"}}>Subtotal
-                                </div>
-                                <div style={{height:"40px",width:"11%",fontSize:"17px",padding:"6px", border:"1px solid lightgray"}}><div>Action</div>
-                                </div>
+                            </div>
+                            <div >
+                                <div style={{display:"flex", flexWrap: "nowrap",width:"100%", backgroundColor:"black", color:"#FFDF00"}}>
+                                    <div  style={{height:"40px", width:"30%",fontSize:"17px",padding:"6px", border:"1px solid #FFDF00"}}>Product
+                                    </div>
+                                    <div  style={{height:"40px",width:"25%",fontSize:"17px",padding:"6px", border:"1px solid #FFDF00" }}>Quantity
+                                    </div>
+                                    <div  style={{height:"40px",width:"17%",fontSize:"17px", padding:"6px", border:"1px solid #FFDF00"}}>Price inc. tax
+                                    </div>
+                                    <div style={{height:"40px",width:"17%",fontSize:"17px", padding:"6px", border:"1px solid #FFDF00"}}>Subtotal
+                                    </div>
+                                    <div style={{height:"40px",width:"11%",fontSize:"17px",padding:"6px", border:"1px solid #FFDF00"}}><div>Action</div>
+                                    </div>
+                            </div>
+                            </div>
                         </div>
 
-                        </div>
                         <div  className="bill-container-container" style={{height:"525px",overflow:"scroll",WebkitScrollSnapType:"none"}}>
                         {customerbill && customerbill.map(currentBill => ( 
                             <div style={{display:"flex", flexWrap: "nowrap",width:"100%", backgroundColor:"#EBEBEB", borderBottom:"1px solid lightgray", borderBottom:"1px solid"}}>
