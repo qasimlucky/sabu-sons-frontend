@@ -24,7 +24,7 @@ function AddAgent(props) {
     setData(newdata)
    // console.log(data)
   }
-  const url = "http://localhost:8000/agent/add"
+  const url = "https://subo-sons-backend.onrender.com/agent/add"
   function submit(e) {
     console.log(data)
     e.preventDefault();

@@ -26,7 +26,7 @@ function EditAgentForm(props) {
     setData(newdata)
    // console.log(data)
   }
-  const url = "http://localhost:8000/agent/edit"
+  const url = "https://subo-sons-backend.onrender.com/agent/edit"
   function submit(e) {
     console.log("this is send data to server")
     console.log(data)

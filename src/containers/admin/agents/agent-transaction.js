@@ -16,7 +16,7 @@ function AgentTransaction() {
 
       useEffect(() => {
         axios
-        .post("http://localhost:8000/agent/transaction", {agent_id:agent_id})
+        .post("https://subo-sons-backend.onrender.com/agent/transaction", {agent_id:agent_id})
         .then(res => {
           console.log(res.data)
           setData(res.data)

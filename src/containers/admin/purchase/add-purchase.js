@@ -33,7 +33,7 @@ function submit(){
     console.log("this is submit")
 }
 useEffect(() => {
-    axios.get("http://localhost:8000/supplier/get").then(Response =>{
+    axios.get("https://subo-sons-backend.onrender.com/supplier/get").then(Response =>{
       console.log(Response.data)
       setSupplierData(Response.data)
     }).catch(err =>{
@@ -42,7 +42,7 @@ useEffect(() => {
 },[]);
 
 useEffect(() => {
-    axios.get("http://localhost:8000/stock/get").then(Response =>{
+    axios.get("https://subo-sons-backend.onrender.com/stock/get").then(Response =>{
       console.log(Response.data)
       setStockData(Response.data)
     }).catch(err =>{
@@ -158,7 +158,7 @@ async function PurchaseAdd(){
       console.log(savebill) */
       
        axios
-      .post("/purchase/add", PurchaseObject)
+      .post("https://subo-sons-backend.onrender.com/purchase/add", PurchaseObject)
       .then(res => {
         console.log(res.data)
         Swal.fire({

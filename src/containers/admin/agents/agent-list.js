@@ -12,7 +12,7 @@ function AgentList() {
   const [itemOffset, setItemOffset] = useState(0);
 
     useEffect(() => {
-      axios.get("http://localhost:8000/agent/get").then(Response =>{
+      axios.get("https://subo-sons-backend.onrender.com/agent/get").then(Response =>{
         console.log(Response.data
           )
         setposts(Response.data)
