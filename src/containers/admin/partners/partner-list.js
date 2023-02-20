@@ -98,7 +98,7 @@ function Partner() {
                           <td>{partnerDetails.email}</td>
                           <td>{partnerDetails.phone_number}</td>
                           <td>{partnerDetails.account_balance}</td>
-                          <BsFillEyeFill onClick={()=>OpenTransactions(partnerDetails)}  style={{margin:"5px", fontSize:"20px",color:"green"}}/>
+                          <td><BsFillEyeFill onClick={()=>OpenTransactions(partnerDetails)}  style={{margin:"5px", fontSize:"20px",color:"green"}}/></td>          
                           <td>
                             <div className="badge badge-success badge-shadow p-2">
                               Active
