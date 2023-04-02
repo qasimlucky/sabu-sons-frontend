@@ -15,6 +15,8 @@ const [thumbnailfile, setThumbnailFile] = useState();
 const [data, setData] = useState({}) 
 const [dbpartner, setDbPartner] = useState()
 const [stockpartner, setStockPartner] = useState([])
+const [dbsaleman, setDbSaleman] = useState()
+const [stocksaleman, setStockSaleman] = useState([])
 const [stockcategories, setStockCategories] = useState([{}])  
 let navigate = useNavigate();
 function ChangeMe(){
@@ -32,6 +34,15 @@ useEffect(() => {
     console.log(err)
   })
   },[]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/saleman/get").then(Response =>{
+      console.log(Response.data)
+      setDbSaleman(Response.data)
+    }).catch(err =>{
+      console.log(err)
+    })
+    },[]);
 
   useEffect(() => {
     axios.get("https://subo-sons-backend.onrender.com/stock/get/categories").then(Response =>{
@@ -62,8 +73,31 @@ useEffect(() => {
 
   }
 
+  function salemanCheckbox(partnerDetails){
+    console.log("this is new partner")
+    var  objIndex = stocksaleman.findIndex((obj => obj.saleman_id == partnerDetails.saleman_id));
+    //console.log(partnerDetails)
+    if(objIndex !== -1){ 
+      console.log('already exist')
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Already selected can't select again`,
+      })
+
+    }else{
+      stocksaleman.push(partnerDetails)
+      console.log(stocksaleman)
+      setStockSaleman([...stocksaleman])
+    }
+
+  }
+
   function DeleteFromArr(partnerDetails){
     setStockPartner(stockpartner.filter(emp => emp.partner_id !== partnerDetails.partner_id))
+  }
+  function DeleteFromArrSaleman(partnerDetails){
+    setStockSaleman(stocksaleman.filter(emp => emp.saleman_id !== partnerDetails.saleman_id))
   }
 
 
@@ -75,8 +109,16 @@ useEffect(() => {
     console.log(stockpartner)
   }
 
+  function handlePercentageSaleman(e,partnerDetails){
+    var  objIndex = stocksaleman.findIndex((obj => obj.saleman_id == partnerDetails.saleman_id));
+    stocksaleman[objIndex].percentage = e.target.value;
+    setStockSaleman([...stocksaleman])
+    console.log("this is changed array")
+    console.log(stocksaleman)
+  }
 
-const url = "https://subo-sons-backend.onrender.com/stock/add"
+
+const url = "/stock/add"
 function handle(e){
        const newdata = {...data}
        newdata[e.target.id] = e.target.value
@@ -97,7 +139,8 @@ async function StockImage (e){
     //console.log(data)
     var submitData = {
       ...data,
-      "partner" :JSON.stringify(stockpartner)
+      "partner" :JSON.stringify(stockpartner),
+      "saleman" :JSON.stringify(stocksaleman)
 
     }
     console.log(submitData)
@@ -143,7 +186,7 @@ async function StockImage (e){
               <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-11 offset-xl-2">
                 <div class="card card-primary">
                   <div class="card-header">
-                    <h4>Add Stock</h4>
+                    <h4>Add Product</h4>
                   </div>
                   <div class="card-body">
                     <form  action="/web/sales/update"  onSubmit = {(e) =>submit(e)} method="HTTP_METHOD" enctype="multipart/form-data">
@@ -230,7 +273,7 @@ async function StockImage (e){
                   <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-11 offset-xl-2">
                     <div class="card card-primary">
                       <div class="card-header">
-                        <h4>Add Stock</h4>
+                        <h4>Add Product</h4>
                       </div>
                       <div class="card-body">
 
@@ -249,43 +292,81 @@ async function StockImage (e){
                                         </div>
                                 </div>  */}
 
-                                               
-                                <div class="form-group col-6 hide-scrollbar" style={{height:"400px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
-                                    <label className="badge badge-primary badge-shadow" style={{color:"white", padding:"9px"}} >Partners</label>
-                                    {dbpartner && dbpartner.map(partnerDetails => (
+                                <div  class="form-group col-6" style={{height:"400px"}}>
+                                  <div class="hide-scrollbar" style={{height:"200px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
+                                      <label className="badge badge-primary badge-shadow" style={{color:"white", padding:"9px"}} >Partners</label>
+                                      {dbpartner && dbpartner.map(partnerDetails => (
+                                        <div class="row">
+                                          
+                                          <div class="form-group col-6">
+                                          {partnerDetails.first_name}
+                                          </div>
+                                          <div class="form-group col-3">
+                                          {partnerDetails.percentage}%
+                                          </div>
+                                          <div class="form-group col-3">
+                                            <button onClick={() =>partnerCheckbox(partnerDetails)} style={{padding:"7px", fontSize:"8px", }} class="btn btn-success btn-lg btn-block" >Add</button>
+                                          </div>
+                                          
+                                        </div>
+                                        ))}
+                                  </div>
+
+                                  <div class="hide-scrollbar" style={{height:"200px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
+                                      <label className="badge badge-primary badge-shadow" style={{color:"white", padding:"9px"}} >Saleman</label>
+                                      {dbsaleman && dbsaleman.map(partnerDetails => (
+                                        <div class="row">
+                                          
+                                          <div class="form-group col-6">
+                                          {partnerDetails.first_name}
+                                          </div>
+                                          <div class="form-group col-3">
+                                          {partnerDetails.percentage}%
+                                          </div>
+                                          <div class="form-group col-3">
+                                            <button onClick={() =>salemanCheckbox(partnerDetails)} style={{padding:"7px", fontSize:"8px", }} class="btn btn-success btn-lg btn-block" >Add</button>
+                                          </div>
+                                          
+                                        </div>
+                                        ))}
+                                  </div>
+                                </div> 
+
+                                <div class="form-group col-5" style={{height:"400px"}}>
+                                  <div class="hide-scrollbar" style={{height:"200px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
+                                    <label className="badge badge-primary badge-shadow" style={{color:"white",padding:"8px"}} >Selected Partners</label>
+                                    {stockpartner && stockpartner.map(partnerDetails => (
                                       <div class="row">
-                                        
-                                        <div class="form-group col-6">
-                                        {partnerDetails.first_name}
+                                      
+                                        <div class="form-group col-7">
+                                          <BsFillTrashFill onClick={() =>DeleteFromArr(partnerDetails)} style={{fontSize:"18px",color:"red", marginRight:'3px'}}/>
+                                          <label for="">{partnerDetails.first_name}</label>
                                         </div>
-                                        <div class="form-group col-3">
-                                        {partnerDetails.percentage}%
+                                        <div class="form-group col-5">
+                                          <input style={{height:'20px'}} onChange = {(e) =>handlePercentage(e,partnerDetails )} id="percentage" type="text" class="form-control" name="percentage"  placeholder="%"/>
                                         </div>
-                                        <div class="form-group col-3">
-                                          <button onClick={() =>partnerCheckbox(partnerDetails)} style={{padding:"7px", fontSize:"8px", }} class="btn btn-success btn-lg btn-block" >Add</button>
-                                        </div>
-                                        
                                       </div>
                                       ))}
+                                    </div>
+
+                                    <div class="hide-scrollbar" style={{height:"200px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
+                                      <label className="badge badge-primary badge-shadow" style={{color:"white",padding:"8px"}} >Selected Partners</label>
+                                      {stocksaleman && stocksaleman.map(partnerDetails => (
+                                        <div class="row">
+                                        
+                                          <div class="form-group col-7">
+                                            <BsFillTrashFill onClick={() =>DeleteFromArrSaleman(partnerDetails)} style={{fontSize:"18px",color:"red", marginRight:'3px'}}/>
+                                            <label for="">{partnerDetails.first_name}</label>
+                                          </div>
+                                          <div class="form-group col-5">
+                                            <input style={{height:'20px'}} onChange = {(e) =>handlePercentageSaleman(e,partnerDetails )} id="percentage" type="text" class="form-control" name="percentage"  placeholder="%"/>
+                                          </div>
+                                        </div>
+                                        ))}
+                                    </div>
                                 </div>
                                 
-                                  <div class="form-group col-5 hide-scrollbar" style={{height:"400px", overflow:"scroll", WebkitScrollSnapType:"none",overflowX: "hidden"}}>
-                                  <label className="badge badge-primary badge-shadow" style={{color:"white",padding:"8px"}} >Selected Partners</label>
-                                  {stockpartner && stockpartner.map(partnerDetails => (
-                                    <div class="row">
-                                     
-                                      <div class="form-group col-7">
-                                        <BsFillTrashFill onClick={() =>DeleteFromArr(partnerDetails)} style={{fontSize:"18px",color:"red", marginRight:'3px'}}/>
-                                        <label for="">{partnerDetails.first_name}</label>
-                                      </div>
-                                      <div class="form-group col-5">
-                                        <input style={{height:'20px'}} onChange = {(e) =>handlePercentage(e,partnerDetails )} id="percentage" type="text" class="form-control" name="percentage"  placeholder="%"/>
-                                      </div>
-                                    </div>
-                                    ))}
-                                    
 
-                                  </div>
                                   
                             </div>
                           </div>
@@ -317,7 +398,7 @@ async function StockImage (e){
                           <div class="form-group col-2"></div>
                             <div class="form-group col-4">
                                 <button onClick={(e) =>submit(e)}  class="btn btn-success btn-lg btn-block" style={{marginTop:"15px"}}>
-                                  Add Stock
+                                  Add Product
                                 </button>
                             </div>
                          

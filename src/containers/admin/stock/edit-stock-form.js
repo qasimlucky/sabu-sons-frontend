@@ -160,7 +160,7 @@ function EditStockForm(props) {
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-11 offset-xl-2">
             <div class="card card-primary">
               <div class="card-header">
-                <h4>Edit Stock</h4>
+                <h4>Edit Product</h4>
               </div>
               <div class="card-body">
                 <form  action="/web/sales/update"  onSubmit = {(e) =>submit(e)} method="HTTP_METHOD" enctype="multipart/form-data">
@@ -247,7 +247,7 @@ function EditStockForm(props) {
                   <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-11 offset-xl-2">
                     <div class="card card-primary">
                       <div class="card-header">
-                        <h4>Add Stock</h4>
+                        <h4>Add Product</h4>
                       </div>
                       <div class="card-body">
 
@@ -334,7 +334,7 @@ function EditStockForm(props) {
                           <div class="form-group col-2"></div>
                             <div class="form-group col-4">
                                 <button onClick={(e) =>submit(e)}  class="btn btn-success btn-lg btn-block" style={{marginTop:"15px"}}>
-                                  Add Stock
+                                  Add Product
                                 </button>
                             </div>
                          

@@ -29,6 +29,9 @@ import SupplierList from './containers/admin/supplier/supplier-list';
 import EditSupplierForm from './containers/admin/supplier/edit-supplier-from';
 import AddPurchase from './containers/admin/purchase/add-purchase';
 import SearchBar from './containers/admin/search-bar';
+import AddSaleman from './containers/admin/saleman/add-saleman';
+import Saleman from './containers/admin/saleman/saleman-list';
+import SalemanTransaction from './containers/admin/saleman/saleman-transaction'
 function App() {
   return (
     <main>
@@ -63,6 +66,9 @@ function App() {
                 <Route path="/editagent" exact element={<EditAgentForm/>}/>
                 <Route path="/addpurchase" exact element={<AddPurchase/>}/>
                 <Route path="/search" exact element={<SearchBar/>}/>
+                <Route path="/addsaleman" exact element={<AddSaleman/>}/>
+                <Route path="/saleman" exact element={<Saleman/>}/>
+                <Route path="/salemantransaction" exact element={<SalemanTransaction/>}/>
                     
             </Routes>
             

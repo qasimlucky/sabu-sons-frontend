@@ -57,15 +57,17 @@ useEffect(() => { // this hook will get called every time myArr has changed
 }, [selectedproduct]) 
 
  const onChangeValue = (event) => {
+  console.log(event.target.value)
   setSerachValue(event.target.value);
 };
 
 const onSearch = (searchTerm) => {
-  console.log("search ", searchTerm);
+  console.log("this is me")
+ console.log("search ", searchTerm);
   console.log("addsearch ", selectedproduct);
     var  objIndex = selectedproduct.findIndex((obj => obj.stock_id == searchTerm.stock_id));
     //console.log(partnerDetails)
-    if(objIndex !== -1){ 
+     if(objIndex !== -1){ 
       console.log('already exist')
       Swal.fire({
         icon: 'error',
@@ -75,7 +77,7 @@ const onSearch = (searchTerm) => {
     }else{
       selectedproduct.push(searchTerm)
       setSelectedProduct([...selectedproduct])
-    }
+    } 
  
 }; 
 
@@ -265,6 +267,7 @@ async function PurchaseAdd(){
                                 {stockdata &&  stockdata
                                   .filter((item) => {
                                       if(searchvalue){
+                                        // .toLowerCase();
                                           const searchTerm = searchvalue.toLowerCase();
                                           const fullName = item.book_title.toLowerCase();
                                           return (

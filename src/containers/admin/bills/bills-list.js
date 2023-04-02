@@ -34,16 +34,11 @@ function AllBill() {
 
     }
     GetRequest();
-    /* data.forEach(myfunction)
-    function myfunction(item){
-      console.log(item.bill_items)
-    } */
+
     },[]);
 
       var itemsPerPage = 6
-      // Simulate fetching items from another resources.
-      // (This could be items from props; or items loaded in a local state
-      // from an API endpoint with useEffect and useState)
+
       const endOffset = itemOffset + itemsPerPage;
       console.log(`Loading items from ${itemOffset} to ${endOffset}`);
       const currentItems = data.slice(itemOffset, endOffset);

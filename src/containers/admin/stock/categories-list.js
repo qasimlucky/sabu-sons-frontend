@@ -47,7 +47,7 @@ function CategoriesList() {
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
-                  <h4>All Stock</h4>
+                  <h4>All Categories</h4>
                   <div className="card-header-form">
                     <Link to="/addcategories" className="btn btn-success ">
                       + Add Categories

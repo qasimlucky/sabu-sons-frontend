@@ -68,7 +68,7 @@ function PointOfSale(props) {
     const time = current.toLocaleTimeString();
     
     useEffect(() => {
-      axios.get("https://subo-sons-backend.onrender.com/stock/get").then(Response =>{
+      axios.get("/stock/get").then(Response =>{
         console.log(Response.data)
         setData(Response.data)
       }).catch(err =>{
@@ -86,7 +86,7 @@ function PointOfSale(props) {
     }
       // All Auther list name
       useEffect(() => {
-        axios.get("https://subo-sons-backend.onrender.com/stock/get/authername").then(Response =>{
+        axios.get("/stock/get/authername").then(Response =>{
           console.log(Response.data)
           setAutherName(Response.data)
         }).catch(err =>{
@@ -95,7 +95,7 @@ function PointOfSale(props) {
         },[]);
 
         useEffect(() => {
-            axios.get("https://subo-sons-backend.onrender.com/stock/get/categoryname").then(Response =>{
+            axios.get("/stock/get/categoryname").then(Response =>{
               console.log(Response.data)
               setCategoryName(Response.data)
             }).catch(err =>{
@@ -105,7 +105,7 @@ function PointOfSale(props) {
 
             //agent data
             useEffect(() => {
-                axios.get("http://localhost:8000/agent/get").then(Response =>{
+                axios.get("/agent/get").then(Response =>{
                   console.log(Response.data)
                   setAgentName(Response.data)
                 }).catch(err =>{
@@ -122,7 +122,7 @@ function PointOfSale(props) {
      function handle(e) {
         var authers=e.target.value
         axios
-            .post("https://subo-sons-backend.onrender.com/stock/get/auther", {auther:authers})
+            .post("/stock/get/auther", {auther:authers})
             .then(res => {
               console.log(res.data)
               setData(res.data)
@@ -135,7 +135,7 @@ function PointOfSale(props) {
         var categories=e.target.value
         console.log(e.target.value)
         axios
-            .post("https://subo-sons-backend.onrender.com/stock/get/categorybook", {categories:categories})
+            .post("/stock/get/categorybook", {categories:categories})
             .then(res => {
               console.log(res.data)
               setData(res.data)
@@ -204,7 +204,7 @@ function PointOfSale(props) {
         }else{
             if(customerbill[objIndex].sell_quantity >=2){
                 customerbill[objIndex].sell_quantity = (customerbill[objIndex].sell_quantity-1)
-                customerbill[objIndex].sub_total = (customerbill[objIndex].sub_total-customerbill[objIndex].whole_sale_price )
+                customerbill[objIndex].sub_total = (customerbill[objIndex].sub_total-customerbill[objIndex].sale_price )
                 setCustomerBill([...customerbill])
             }else{
                 setCustomerBill(customerbill.filter(emp => emp.stock_id !== Bill.stock_id))
@@ -545,7 +545,6 @@ function handleCashIn(e){
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div >
                                 <div style={{display:"flex", flexWrap: "nowrap",width:"100%", backgroundColor:"black", color:"#FFDF00"}}>
@@ -839,10 +838,10 @@ function handleCashIn(e){
                         {/* card */}
                         <div style={{ width:"100%",height:"620px",marginTop:"18px"}}>
                             <div className="pos-card-container" style={{ width:"100%",display:"flex", flexWrap:"wrap" ,height:"600px", overflow:"scroll", WebkitScrollSnapType:"none"}}>
-                            {data.map(stockDetails => ( 
-                                <div class="pos-card" style={{margin:"7px"}} onClick={()=>Bill(stockDetails)}>
+                            {data && data.map(stockDetails => ( 
+                                <div class="pos-card" style={{margin:"5px"}} onClick={()=>Bill(stockDetails)}>
                                 <img src={stockDetails.stock_image} alt="Image" style={{width:"132px",height:"130px"}}/>
-                                <h5>{stockDetails.book_title}</h5>
+                                <h6>{stockDetails.book_title}</h6>
                                 </div>
                             ))}
                                 {/* <div class="pos-card" style={{margin:"7px"}}>
@@ -851,6 +850,8 @@ function handleCashIn(e){
                                 </div> */}
                             </div>
                         </div>
+
+                        
                     </div>
                     {/* card container  End*/}
                     
