@@ -32,6 +32,10 @@ import SearchBar from './containers/admin/search-bar';
 import AddSaleman from './containers/admin/saleman/add-saleman';
 import Saleman from './containers/admin/saleman/saleman-list';
 import SalemanTransaction from './containers/admin/saleman/saleman-transaction'
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+
 function App() {
   return (
     <main>
@@ -78,3 +82,4 @@ function App() {
 }
 
 export default App;
+
